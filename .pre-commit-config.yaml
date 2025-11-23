@@ -1,0 +1,61 @@
+fail_fast: true
+default_language_version:
+  python: python3.12
+repos:
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.20.0
+    hooks:
+      - id: pyupgrade
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: "v2.4.1"
+    hooks:
+      - id: codespell
+        additional_dependencies:
+          - tomli
+        files: ^.*\.(py|c|h|md|rst|yml)$
+        exclude: applications/sesa/search_and_rescue/object_classification/src/util/classes.py
+        args: ["--write-changes", "--interactive", "3", "-L", "AKS,americanus"]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.8
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+
+  # - repo: local
+  #   hooks:
+  #     - id: ty
+  #       name: ty check
+  #       entry: uvx ty check src/
+  #       language: system
+  #       files: src/
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.28.0
+    hooks:
+      - id: gitleaks
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        files: /.*\.(py|yaml|json)$
+      - id: end-of-file-fixer
+        files: /.*\.(py|yaml|json)$
+      - id: check-yaml
+        exclude: |
+          (?x)^(
+            .*/charts/.*|
+            .*/templates/.*
+          )$
+        files: /.*\.yaml$
+        args: [--allow-multiple-documents]
+      - id: check-json
+        files: /.*\.json$
+      - id: pretty-format-json
+        args: [--autofix]
+        files: /.*\.json$
+      - id: check-toml
+        files: /.*\.toml$

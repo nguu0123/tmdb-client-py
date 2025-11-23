@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tmdbsimple.discover
 ~~~~~~~~~~~~~~~~~~~
@@ -20,10 +18,11 @@ class Discover(TMDB):
 
     See: https://developers.themoviedb.org/3/discover
     """
-    BASE_PATH = 'discover'
+
+    BASE_PATH = "discover"
     URLS = {
-        'movie': '/movie',
-        'tv': '/tv',
+        "movie": "/movie",
+        "tv": "/tv",
     }
 
     def movie(self, **kwargs):
@@ -129,7 +128,7 @@ class Discover(TMDB):
                 Only includes movies that have one of the ID's added as a
                 keyword.
             without_keywords: (optional) Exclude items with certain keywords.
-                You can comma and pipe seperate these values to create an 'AND' or 'OR' logic.
+                You can comma and pipe separate these values to create an 'AND' or 'OR' logic.
             with_runtime.gte: (optional) Filter and only include movies that
                 have a runtime that is greater or equal to a value.
             with_runtime.lte: (optional) Filter and only include movies that
@@ -138,17 +137,17 @@ class Discover(TMDB):
                 filter results by their original language value.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
         # Periods are not allowed in keyword arguments but several API
         # arguments contain periods. See both usages in tests/test_discover.py.
         for param in dict(kwargs):
-            if '_lte' in param:
-                kwargs[param.replace('_lte', '.lte')] = kwargs.pop(param)
-            if '_gte' in param:
-                kwargs[param.replace('_gte', '.gte')] = kwargs.pop(param)
+            if "_lte" in param:
+                kwargs[param.replace("_lte", ".lte")] = kwargs.pop(param)
+            if "_gte" in param:
+                kwargs[param.replace("_gte", ".gte")] = kwargs.pop(param)
 
-        path = self._get_path('movie')
+        path = self._get_path("movie")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -225,7 +224,7 @@ class Discover(TMDB):
             with_original_language: (optional) Specify an ISO 639-1 string to
                 filter results by their original language value.
             without_keywords: (optional) Exclude items with certain keywords.
-                You can comma and pipe seperate these values to create an 'AND'
+                You can comma and pipe separate these values to create an 'AND'
                 or 'OR' logic.
             screened_theatrically: (optional) Filter results to include items
                 that have been screened theatrically.
@@ -237,17 +236,17 @@ class Discover(TMDB):
                 keyword.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
         # Periods are not allowed in keyword arguments but several API
         # arguments contain periods. See both usages in tests/test_discover.py.
         for param in dict(kwargs):
-            if '_lte' in param:
-                kwargs[param.replace('_lte', '.lte')] = kwargs.pop(param)
-            if '_gte' in param:
-                kwargs[param.replace('_gte', '.gte')] = kwargs.pop(param)
+            if "_lte" in param:
+                kwargs[param.replace("_lte", ".lte")] = kwargs.pop(param)
+            if "_gte" in param:
+                kwargs[param.replace("_gte", ".gte")] = kwargs.pop(param)
 
-        path = self._get_path('tv')
+        path = self._get_path("tv")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

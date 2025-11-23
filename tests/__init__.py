@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 __init__.py
 ~~~~~~~~~~~
@@ -16,7 +14,7 @@ Use the following command to run all the tests:
 """
 Either place your API_KEY in the following constant:
 """
-API_KEY = ''
+API_KEY = ""
 
 """
 or include it in a keys.py file.
@@ -26,4 +24,4 @@ try:
 except ImportError:
     pass
 
-__all__ = ['API_KEY', 'USERNAME', 'PASSWORD', 'SESSION_ID']
+__all__ = ["API_KEY", "USERNAME", "PASSWORD", "SESSION_ID"]

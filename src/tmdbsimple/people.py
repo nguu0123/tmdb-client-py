@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tmdbsimple.people
 ~~~~~~~~~~~~~~~~~
@@ -20,23 +18,24 @@ class People(TMDB):
 
     See: https://developers.themoviedb.org/3/people
     """
-    BASE_PATH = 'person'
+
+    BASE_PATH = "person"
     URLS = {
-        'info': '/{id}',
-        'changes': '/{id}/changes',
-        'movie_credits': '/{id}/movie_credits',
-        'tv_credits': '/{id}/tv_credits',
-        'combined_credits': '/{id}/combined_credits',
-        'external_ids': '/{id}/external_ids',
-        'images': '/{id}/images',
-        'tagged_images': '/{id}/tagged_images',
-        'translations': '/{id}/translations',
-        'latest': '/latest',
-        'popular': '/popular',
+        "info": "/{id}",
+        "changes": "/{id}/changes",
+        "movie_credits": "/{id}/movie_credits",
+        "tv_credits": "/{id}/tv_credits",
+        "combined_credits": "/{id}/combined_credits",
+        "external_ids": "/{id}/external_ids",
+        "images": "/{id}/images",
+        "tagged_images": "/{id}/tagged_images",
+        "translations": "/{id}/translations",
+        "latest": "/latest",
+        "popular": "/popular",
     }
 
     def __init__(self, id=0):
-        super(People, self).__init__()
+        super().__init__()
         self.id = id
 
     def info(self, **kwargs):
@@ -52,9 +51,9 @@ class People(TMDB):
                 namespace to the response.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('info')
+        path = self._get_id_path("info")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -75,9 +74,9 @@ class People(TMDB):
             page: (optional) Minimum 1, maximum 1000, default 1.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('changes')
+        path = self._get_id_path("changes")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -91,9 +90,9 @@ class People(TMDB):
             language: (optional) ISO 639-1 code.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('movie_credits')
+        path = self._get_id_path("movie_credits")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -110,9 +109,9 @@ class People(TMDB):
             language: (optional) ISO 639-1 code.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('tv_credits')
+        path = self._get_id_path("tv_credits")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -126,9 +125,9 @@ class People(TMDB):
             language: (optional) ISO 639-1 code.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('combined_credits')
+        path = self._get_id_path("combined_credits")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -151,9 +150,9 @@ class People(TMDB):
             language: (optional) ISO 639-1 code.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('external_ids')
+        path = self._get_id_path("external_ids")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -167,9 +166,9 @@ class People(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('images')
+        path = self._get_id_path("images")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -184,9 +183,9 @@ class People(TMDB):
             page: (optional) Minimum 1, maximum 1000, default 1.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('tagged_images')
+        path = self._get_id_path("tagged_images")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -200,9 +199,9 @@ class People(TMDB):
             language: (optional) ISO 639-1 code.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('translations')
+        path = self._get_id_path("translations")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -217,9 +216,9 @@ class People(TMDB):
             language: (optional) ISO 639-1 code.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('latest')
+        path = self._get_path("latest")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -234,9 +233,9 @@ class People(TMDB):
             page: (optional) Minimum 1, maximum 1000, default 1.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('popular')
+        path = self._get_path("popular")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -249,13 +248,14 @@ class Credits(TMDB):
 
     See: https://developers.themoviedb.org/3/credits
     """
-    BASE_PATH = 'credit'
+
+    BASE_PATH = "credit"
     URLS = {
-        'info': '/{credit_id}',
+        "info": "/{credit_id}",
     }
 
     def __init__(self, credit_id):
-        super(Credits, self).__init__()
+        super().__init__()
         self.credit_id = credit_id
 
     def info(self, **kwargs):
@@ -266,9 +266,9 @@ class Credits(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_credit_id_path('info')
+        path = self._get_credit_id_path("info")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

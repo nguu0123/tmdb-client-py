@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tmdbsimple.search
 ~~~~~~~~~~~~~~~~~
@@ -20,15 +18,16 @@ class Search(TMDB):
 
     See: https://developers.themoviedb.org/3/search
     """
-    BASE_PATH = 'search'
+
+    BASE_PATH = "search"
     URLS = {
-        'company': '/company',
-        'collection': '/collection',
-        'keyword': '/keyword',
-        'movie': '/movie',
-        'multi': '/multi',
-        'person': '/person',
-        'tv': '/tv',
+        "company": "/company",
+        "collection": "/collection",
+        "keyword": "/keyword",
+        "movie": "/movie",
+        "multi": "/multi",
+        "person": "/person",
+        "tv": "/tv",
     }
 
     def company(self, **kwargs):
@@ -41,9 +40,9 @@ class Search(TMDB):
             page: (optional) Minimum 1, maximum 1000, default 1.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('company')
+        path = self._get_path("company")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -60,9 +59,9 @@ class Search(TMDB):
             page: (optional) Minimum 1, maximum 1000, default 1.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('collection')
+        path = self._get_path("collection")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -78,9 +77,9 @@ class Search(TMDB):
             page: (optional) Minimum 1, maximum 1000, default 1.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('keyword')
+        path = self._get_path("keyword")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -95,7 +94,7 @@ class Search(TMDB):
             query: (required) Pass a text query to search. This value should be
                 URI encoded.
             page: (optional) Minimum 1, maximum 1000, default 1.
-            include_adult: (optional) Choose whether to inlcude adult
+            include_adult: (optional) Choose whether to include adult
                 (pornography) content in the results.
             region: (optional) Specify a ISO 3166-1 code to filter release
                 dates. Must be uppercase.
@@ -105,9 +104,9 @@ class Search(TMDB):
                 specific primary release year.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('movie')
+        path = self._get_path("movie")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -123,15 +122,15 @@ class Search(TMDB):
             query: (required) Pass a text query to search. This value should be
                 URI encoded.
             page: (optional) Minimum 1, maximum 1000, default 1.
-            include_adult: (optional) Choose whether to inlcude adult
+            include_adult: (optional) Choose whether to include adult
                 (pornography) content in the results.
             region: (optional) Specify a ISO 3166-1 code to filter release
                 dates. Must be uppercase.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('multi')
+        path = self._get_path("multi")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -146,15 +145,15 @@ class Search(TMDB):
             query: (required) Pass a text query to search. This value should be
                 URI encoded.
             page: (optional) Minimum 1, maximum 1000, default 1.
-            include_adult: (optional) Choose whether to inlcude adult
+            include_adult: (optional) Choose whether to include adult
                 (pornography) content in the results.
             region: (optional) Specify a ISO 3166-1 code to filter release
                 dates. Must be uppercase.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('person')
+        path = self._get_path("person")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -169,15 +168,15 @@ class Search(TMDB):
             query: (required) Pass a text query to search. This value should be
                 URI encoded.
             page: (optional) Minimum 1, maximum 1000, default 1.
-            include_adult: (optional) Choose whether to inlcude adult
+            include_adult: (optional) Choose whether to include adult
                 (pornography) content in the results.
             first_air_date_year: (optional) Filter the results to only match
                 shows that have an air date with with value.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('tv')
+        path = self._get_path("tv")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

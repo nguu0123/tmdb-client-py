@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 test_genres.py
 ~~~~~~~~~~~~~~
@@ -16,6 +14,7 @@ import unittest
 import tmdbsimple as tmdb
 
 from tests import API_KEY
+
 tmdb.API_KEY = API_KEY
 
 """
@@ -28,15 +27,15 @@ class GenresTestCase(unittest.TestCase):
     def test_genres_movie_list(self):
         genre = tmdb.Genres()
         genre.movie_list()
-        self.assertTrue(hasattr(genre, 'genres'))
+        self.assertTrue(hasattr(genre, "genres"))
 
     def test_genres_tv_list(self):
         genre = tmdb.Genres()
         genre.tv_list()
-        self.assertTrue(hasattr(genre, 'genres'))
+        self.assertTrue(hasattr(genre, "genres"))
 
     def test_genres_movies(self):
         id = GENRE_ID
         genre = tmdb.Genres(id)
         genre.movies()
-        self.assertTrue(hasattr(genre, 'results'))
+        self.assertTrue(hasattr(genre, "results"))

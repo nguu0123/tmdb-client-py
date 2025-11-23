@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tmdbsimple.find
 ~~~~~~~~~~~~~~~
@@ -20,13 +18,14 @@ class Find(TMDB):
 
     See: https://developers.themoviedb.org/3/find
     """
-    BASE_PATH = 'find'
+
+    BASE_PATH = "find"
     URLS = {
-        'info': '/{id}',
+        "info": "/{id}",
     }
 
     def __init__(self, id=0):
-        super(Find, self).__init__()
+        super().__init__()
         self.id = id
 
     def info(self, **kwargs):
@@ -49,9 +48,9 @@ class Find(TMDB):
                 instagram_id
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('info')
+        path = self._get_id_path("info")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -64,13 +63,14 @@ class Trending(TMDB):
 
     See: https://developers.themoviedb.org/3/trending
     """
-    BASE_PATH = 'trending'
+
+    BASE_PATH = "trending"
     URLS = {
-        'info': '/{media_type}/{time_window}',
+        "info": "/{media_type}/{time_window}",
     }
 
-    def __init__(self, media_type='all', time_window='day'):
-        super(Trending, self).__init__()
+    def __init__(self, media_type="all", time_window="day"):
+        super().__init__()
         self.media_type = media_type
         self.time_window = time_window
 
@@ -96,9 +96,9 @@ class Trending(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_media_type_time_window_path('info')
+        path = self._get_media_type_time_window_path("info")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

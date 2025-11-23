@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tmdbsimple.configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -22,14 +20,15 @@ class Configuration(TMDB):
 
     See: https://developers.themoviedb.org/3/configuration
     """
-    BASE_PATH = 'configuration'
+
+    BASE_PATH = "configuration"
     URLS = {
-        'info': '',
-        'countries': '/countries',
-        'jobs': '/jobs',
-        'languages': '/languages',
-        'primary_translations': '/primary_translations',
-        'timezones': '/timezones',
+        "info": "",
+        "countries": "/countries",
+        "jobs": "/jobs",
+        "languages": "/languages",
+        "primary_translations": "/primary_translations",
+        "timezones": "/timezones",
     }
 
     def info(self, **kwargs):
@@ -57,9 +56,9 @@ class Configuration(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('info')
+        path = self._get_path("info")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -73,9 +72,9 @@ class Configuration(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('countries')
+        path = self._get_path("countries")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -89,9 +88,9 @@ class Configuration(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('jobs')
+        path = self._get_path("jobs")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -105,9 +104,9 @@ class Configuration(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('languages')
+        path = self._get_path("languages")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -121,9 +120,9 @@ class Configuration(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('primary_translations')
+        path = self._get_path("primary_translations")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -137,9 +136,9 @@ class Configuration(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('timezones')
+        path = self._get_path("timezones")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -152,10 +151,11 @@ class Certifications(TMDB):
 
     See: https://developers.themoviedb.org/3/certifications
     """
-    BASE_PATH = 'certification'
+
+    BASE_PATH = "certification"
     URLS = {
-        'movie_list': '/movie/list',
-        'tv_list': '/tv/list',
+        "movie_list": "/movie/list",
+        "tv_list": "/tv/list",
     }
 
     def movie_list(self, **kwargs):
@@ -166,9 +166,9 @@ class Certifications(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('movie_list')
+        path = self._get_path("movie_list")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -182,15 +182,15 @@ class Certifications(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('tv_list')
+        path = self._get_path("tv_list")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    # backward compatability, when only /movie/list existed
+    # backward compatibility, when only /movie/list existed
     def list(self, **kwargs):
         """
         Get the list of supported certifications for movies.
@@ -199,9 +199,9 @@ class Certifications(TMDB):
             None
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('movie_list')
+        path = self._get_path("movie_list")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 test_people.py
 ~~~~~~~~~~~~~~
@@ -16,15 +14,16 @@ import unittest
 import tmdbsimple as tmdb
 
 from tests import API_KEY
+
 tmdb.API_KEY = API_KEY
 
 """
 Constants
 """
 PEOPLE_ID = 287
-PEOPLE_NAME = 'Brad Pitt'
-CREDITS_ID = '52542282760ee313280017f9'
-CREDITS_DEPARTMENT = 'Acting'
+PEOPLE_NAME = "Brad Pitt"
+CREDITS_ID = "52542282760ee313280017f9"
+CREDITS_DEPARTMENT = "Acting"
 
 
 class PeopleTestCase(unittest.TestCase):
@@ -39,59 +38,59 @@ class PeopleTestCase(unittest.TestCase):
         id = PEOPLE_ID
         person = tmdb.People(id)
         person.changes()
-        self.assertTrue(hasattr(person, 'changes'))
+        self.assertTrue(hasattr(person, "changes"))
 
     def test_people_movie_credits(self):
         id = PEOPLE_ID
         person = tmdb.People(id)
         person.movie_credits()
-        self.assertTrue(hasattr(person, 'cast'))
+        self.assertTrue(hasattr(person, "cast"))
 
     def test_people_tv_credits(self):
         id = PEOPLE_ID
         person = tmdb.People(id)
         person.tv_credits()
-        self.assertTrue(hasattr(person, 'cast'))
+        self.assertTrue(hasattr(person, "cast"))
 
     def test_people_combined_credits(self):
         id = PEOPLE_ID
         person = tmdb.People(id)
         person.combined_credits()
-        self.assertTrue(hasattr(person, 'cast'))
+        self.assertTrue(hasattr(person, "cast"))
 
     def test_people_external_ids(self):
         id = PEOPLE_ID
         person = tmdb.People(id)
         person.external_ids()
-        self.assertTrue(hasattr(person, 'tvrage_id'))
+        self.assertTrue(hasattr(person, "tvrage_id"))
 
     def test_people_images(self):
         id = PEOPLE_ID
         person = tmdb.People(id)
         person.images()
-        self.assertTrue(hasattr(person, 'profiles'))
+        self.assertTrue(hasattr(person, "profiles"))
 
     def test_people_tagged_images(self):
         id = PEOPLE_ID
         person = tmdb.People(id)
         person.tagged_images()
-        self.assertTrue(hasattr(person, 'results'))
+        self.assertTrue(hasattr(person, "results"))
 
     def test_people_translations(self):
         id = PEOPLE_ID
         person = tmdb.People(id)
         person.translations()
-        self.assertTrue(hasattr(person, 'translations'))
+        self.assertTrue(hasattr(person, "translations"))
 
     def test_people_latest(self):
         person = tmdb.People()
         person.latest()
-        self.assertTrue(hasattr(person, 'name'))
+        self.assertTrue(hasattr(person, "name"))
 
     def test_people_popular(self):
         person = tmdb.People()
         person.popular()
-        self.assertTrue(hasattr(person, 'results'))
+        self.assertTrue(hasattr(person, "results"))
 
 
 class CreditsTestCase(unittest.TestCase):

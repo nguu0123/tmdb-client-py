@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tmdbsimple.genres
 ~~~~~~~~~~~~~~~~~
@@ -20,15 +18,16 @@ class Genres(TMDB):
 
     See: https://developers.themoviedb.org/3/genres
     """
-    BASE_PATH = 'genre'
+
+    BASE_PATH = "genre"
     URLS = {
-        'movie_list': '/movie/list',
-        'tv_list': '/tv/list',
-        'movies': '/{id}/movies',    # backward compatability
+        "movie_list": "/movie/list",
+        "tv_list": "/tv/list",
+        "movies": "/{id}/movies",  # backward compatibility
     }
 
     def __init__(self, id=0):
-        super(Genres, self).__init__()
+        super().__init__()
         self.id = id
 
     def movie_list(self, **kwargs):
@@ -39,9 +38,9 @@ class Genres(TMDB):
             language: (optional) ISO 639-1 code.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('movie_list')
+        path = self._get_path("movie_list")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -55,15 +54,15 @@ class Genres(TMDB):
             language: (optional) ISO 639-1 code.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('tv_list')
+        path = self._get_path("tv_list")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    # backward compatability
+    # backward compatibility
     def movies(self, **kwargs):
         """
         Get the list of movies for a particular genre by id. By default, only
@@ -79,9 +78,9 @@ class Genres(TMDB):
                            Expected value is: True or False.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path('movies')
+        path = self._get_id_path("movies")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

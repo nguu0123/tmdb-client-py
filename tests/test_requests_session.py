@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 test_requests_session.py
 ~~~~~~~~~~~~~~
@@ -14,17 +13,18 @@ Created by Celia Oakley on 2022-01-18
 import unittest
 import tmdbsimple as tmdb
 
+import requests
 from tests import API_KEY
+
 tmdb.API_KEY = API_KEY
 
-import requests
-tmdb.REQUESTS_SESSION = requests.Session()    # specify an explicit session
+tmdb.REQUESTS_SESSION = requests.Session()  # specify an explicit session
 
 """
 Constants
 """
 MOVIE_ID = 103332
-MOVIE_TITLE = 'Ruby Sparks'
+MOVIE_TITLE = "Ruby Sparks"
 
 
 class RequestsSessionTestCase(unittest.TestCase):

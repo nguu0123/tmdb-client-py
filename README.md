@@ -157,7 +157,7 @@ the producers spend more money trying to out do the previous sequel.
 In this case you are both correct.  The third movie was cheaper than the
 second, which was more expensive than the first.
 
-You also can call one of the methods without explicitly instanciating an
+You also can call one of the methods without explicitly instantiating an
 object.
 
 ```python

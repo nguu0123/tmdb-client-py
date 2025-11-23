@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tmdbsimple.changes
 ~~~~~~~~~~~~~~~~~~
@@ -20,11 +18,12 @@ class Changes(TMDB):
 
     See: https://developers.themoviedb.org/3/changes
     """
-    BASE_PATH = ''
+
+    BASE_PATH = ""
     URLS = {
-        'movie': 'movie/changes',
-        'tv': 'tv/changes',
-        'person': 'person/changes',
+        "movie": "movie/changes",
+        "tv": "tv/changes",
+        "person": "person/changes",
     }
 
     def movie(self, **kwargs):
@@ -42,9 +41,9 @@ class Changes(TMDB):
             page: (optional) Minimum 1, maximum 1000, default 1.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('movie')
+        path = self._get_path("movie")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -65,9 +64,9 @@ class Changes(TMDB):
             page: (optional) Minimum 1, maximum 1000, default 1.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('tv')
+        path = self._get_path("tv")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -88,9 +87,9 @@ class Changes(TMDB):
             page: (optional) Minimum 1, maximum 1000, default 1.
 
         Returns:
-            A dict respresentation of the JSON returned from the API.
+            A dict representation of the JSON returned from the API.
         """
-        path = self._get_path('person')
+        path = self._get_path("person")
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 tmdbsimple.base
 ~~~~~~~~~~~~~~~
@@ -19,17 +17,20 @@ class APIKeyError(Exception):
     pass
 
 
-class TMDB(object):
-    headers = {'Content-Type': 'application/json',
-               'Accept': 'application/json',
-               'Connection': 'close'}
-    BASE_PATH = ''
+class TMDB:
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Connection": "close",
+    }
+    BASE_PATH = ""
     URLS = {}
 
     def __init__(self):
         from . import API_VERSION, REQUESTS_SESSION, REQUESTS_TIMEOUT
-        self.base_uri = 'https://api.themoviedb.org'
-        self.base_uri += '/{version}'.format(version=API_VERSION)
+
+        self.base_uri = "https://api.themoviedb.org"
+        self.base_uri += "/{version}".format(version=API_VERSION)
         self.session = REQUESTS_SESSION
         self.timeout = REQUESTS_TIMEOUT
 
@@ -40,47 +41,53 @@ class TMDB(object):
         return self._get_path(key).format(id=self.id)
 
     def _get_guest_session_id_path(self, key):
-        return self._get_path(key).format(
-            guest_session_id=self.guest_session_id)
+        return self._get_path(key).format(guest_session_id=self.guest_session_id)
 
     def _get_credit_id_path(self, key):
         return self._get_path(key).format(credit_id=self.credit_id)
 
     def _get_media_type_time_window_path(self, key):
         return self._get_path(key).format(
-            media_type=self.media_type, time_window=self.time_window)
+            media_type=self.media_type, time_window=self.time_window
+        )
 
     def _get_tv_id_season_number_path(self, key):
         return self._get_path(key).format(
-            tv_id=self.tv_id, season_number=self.season_number)
+            tv_id=self.tv_id, season_number=self.season_number
+        )
 
     def _get_tv_id_season_number_episode_number_path(self, key):
         return self._get_path(key).format(
-            tv_id=self.tv_id, season_number=self.season_number,
-            episode_number=self.episode_number)
+            tv_id=self.tv_id,
+            season_number=self.season_number,
+            episode_number=self.episode_number,
+        )
 
     def _get_complete_url(self, path):
-        return '{base_uri}/{path}'.format(base_uri=self.base_uri, path=path)
+        return "{base_uri}/{path}".format(base_uri=self.base_uri, path=path)
 
     def _get_params(self, params):
-        from . import API_KEY
-        if not API_KEY:
-            raise APIKeyError
-
-        api_dict = {'api_key': API_KEY}
+        # Remove session_id and guest_session_id from URL parameters as they should be in headers
         if params:
-            params.update(api_dict)
+            # Remove session-related parameters that will be handled in headers
+            params.pop("session_id", None)
+            params.pop("guest_session_id", None)
             for key, value in params.items():
                 if isinstance(params[key], bool):
-                    params[key] = 'true' if value is True else 'false'
-
-        else:
-            params = api_dict
+                    params[key] = "true" if value is True else "false"
         return params
 
     def _request(self, method, path, params=None, payload=None):
         url = self._get_complete_url(path)
         params = self._get_params(params)
+
+        # Add API key as Authorization header
+        headers = self.headers.copy()
+        from . import API_KEY
+
+        if not API_KEY:
+            raise APIKeyError
+        headers["Authorization"] = f"Bearer {API_KEY}"
 
         # Create a new request session if no global session is defined
         if self.session is None:
@@ -89,7 +96,8 @@ class TMDB(object):
                 url,
                 params=params,
                 data=json.dumps(payload) if payload else payload,
-                headers=self.headers, timeout=self.timeout
+                headers=headers,
+                timeout=self.timeout,
             )
 
         # Use the global requests session the user provided
@@ -99,21 +107,22 @@ class TMDB(object):
                 url,
                 params=params,
                 data=json.dumps(payload) if payload else payload,
-                headers=self.headers, timeout=self.timeout
+                headers=headers,
+                timeout=self.timeout,
             )
 
         response.raise_for_status()
-        response.encoding = 'utf-8'
+        response.encoding = "utf-8"
         return response.json()
 
     def _GET(self, path, params=None):
-        return self._request('GET', path, params=params)
+        return self._request("GET", path, params=params)
 
     def _POST(self, path, params=None, payload=None):
-        return self._request('POST', path, params=params, payload=payload)
+        return self._request("POST", path, params=params, payload=payload)
 
     def _DELETE(self, path, params=None, payload=None):
-        return self._request('DELETE', path, params=params, payload=payload)
+        return self._request("DELETE", path, params=params, payload=payload)
 
     def _set_attrs_to_values(self, response={}):
         """

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 test_find.py
 ~~~~~~~~~~~~
@@ -16,16 +14,17 @@ import unittest
 import tmdbsimple as tmdb
 
 from tests import API_KEY
+
 tmdb.API_KEY = API_KEY
 
 """
 Constants
 """
-FIND_MOVIE_ID = 'tt0266543'
-FIND_SOURCE = 'imdb_id'
-FIND_TITLE = 'Finding Nemo'
-TRENDING_MEDIA_TYPE = 'movie'
-TRENDING_TIME_WINDOW = 'week'
+FIND_MOVIE_ID = "tt0266543"
+FIND_SOURCE = "imdb_id"
+FIND_TITLE = "Finding Nemo"
+TRENDING_MEDIA_TYPE = "movie"
+TRENDING_TIME_WINDOW = "week"
 
 
 class FindTestCase(unittest.TestCase):
@@ -35,7 +34,7 @@ class FindTestCase(unittest.TestCase):
         title = FIND_TITLE
         find = tmdb.Find(id)
         find.info(external_source=external_source)
-        self.assertEqual(find.movie_results[0]['title'], title)
+        self.assertEqual(find.movie_results[0]["title"], title)
 
 
 class TrendingTestCase(unittest.TestCase):
@@ -44,4 +43,4 @@ class TrendingTestCase(unittest.TestCase):
         time_window = TRENDING_TIME_WINDOW
         trend = tmdb.Trending(media_type=media_type, time_window=time_window)
         trend.info()
-        self.assertEqual(trend.results[0]['media_type'], TRENDING_MEDIA_TYPE)
+        self.assertEqual(trend.results[0]["media_type"], TRENDING_MEDIA_TYPE)
