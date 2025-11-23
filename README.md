@@ -1,7 +1,7 @@
 # tmdb-client-py - Modern TMDB API Client
 
-![Python package](https://github.com/celiao/tmdb-client-py/workflows/build/badge.svg)
-![codecov](https://img.shields.io/codecov/c/github/celiao/tmdb-client-py)
+![Python package](https://github.com/nguu0123/tmdb-client-py/workflows/build/badge.svg)
+![codecov](https://img.shields.io/codecov/c/github/nguu0123/tmdb-client-py)
 ![pypi](https://img.shields.io/pypi/pyversions/tmdb-client-py)
 ![pypi](https://img.shields.io/pypi/v/tmdb-client-py)
 
