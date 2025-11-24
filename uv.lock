@@ -259,8 +259,8 @@ wheels = [
 ]
 
 [[package]]
-name = "tmdbsimple"
-version = "2.9.2"
+name = "tmdb-client-py"
+version = "1.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "requests" },

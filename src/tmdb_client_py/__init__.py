@@ -1,9 +1,9 @@
 """
-tmdbsimple
+tmdb_client_py
 ~~~~~~~~~~
 
-*tmdbsimple* is a wrapper, written in Python, for The Movie Database (TMDb)
-API v3.  By calling the functions available in *tmdbsimple* you can simplify
+*tmdb_client_py* is a wrapper, written in Python, for The Movie Database (TMDb)
+API v3.  By calling the functions available in *tmdb_client_py* you can simplify
 your code and easily access a vast amount of movie, tv, and cast data.  To find
 out more about The Movie Database API, check out the overview page
 http://www.themoviedb.org/documentation/api and documentation page
@@ -14,7 +14,7 @@ https://www.themoviedb.org/documentation/api/status-codes
 :license: GPLv3, see LICENSE for more details
 """
 
-__title__ = "tmdbsimple"
+__title__ = "tmdb_client_py"
 __version__ = "2.9.2"
 __author__ = "Celia Oakley"
 __copyright__ = "Copyright (c) 2013-2025 Celia Oakley"

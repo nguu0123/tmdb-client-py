@@ -2,7 +2,7 @@
 test_base.py
 ~~~~~~~~~~~~~~~
 
-This test suite checks the methods of the TMDB class of tmdbsimple.
+This test suite checks the methods of the TMDB class of tmdb_client_py.
 
 Created by Celia Oakley on 2018-01-06
 
@@ -11,7 +11,7 @@ Created by Celia Oakley on 2018-01-06
 """
 
 import unittest
-import tmdbsimple as tmdb
+import tmdb_client_py as tmdb
 
 from tests import API_KEY
 

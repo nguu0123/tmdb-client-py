@@ -2,7 +2,7 @@
 __init__.py
 ~~~~~~~~~~~
 
-This test suite checks the methods of tmdbsimple.
+This test suite checks the methods of tmdb_client_py.
 
 Use the following command to run all the tests:
     python -W ignore:ResourceWarning -m unittest discover tests

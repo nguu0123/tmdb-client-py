@@ -2,7 +2,7 @@
 test_changes.py
 ~~~~~~~~~~~~~~~
 
-This test suite checks the methods of the Changes class of tmdbsimple.
+This test suite checks the methods of the Changes class of tmdb_client_py.
 
 Created by Celia Oakley on 2013-11-05
 
@@ -11,7 +11,7 @@ Created by Celia Oakley on 2013-11-05
 """
 
 import unittest
-import tmdbsimple as tmdb
+import tmdb_client_py as tmdb
 
 from tests import API_KEY
 

@@ -2,7 +2,7 @@
 test_requests_session.py
 ~~~~~~~~~~~~~~
 
-This test suite checks having a user-defined REQUESTS_SESSION with tmdbsimple.
+This test suite checks having a user-defined REQUESTS_SESSION with tmdb_client_py.
 
 Created by Celia Oakley on 2022-01-18
 
@@ -11,7 +11,7 @@ Created by Celia Oakley on 2022-01-18
 """
 
 import unittest
-import tmdbsimple as tmdb
+import tmdb_client_py as tmdb
 
 import requests
 from tests import API_KEY
