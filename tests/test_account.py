@@ -49,6 +49,7 @@ SUCCESSFUL_REMOVE_ITEM = 13
 SUCCESSFUL_DELETE = 12
 
 
+@unittest.skip("Skipping AccountTestCase")
 class AccountTestCase(unittest.TestCase):
     # run this test with a valid session_id and authenticated account
     def test_account_info(self):
