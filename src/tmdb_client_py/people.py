@@ -174,23 +174,6 @@ class People(TMDB):
         self._set_attrs_to_values(response)
         return response
 
-    def tagged_images(self, **kwargs):
-        """
-        Get the images that this person has been tagged in.
-
-        Args:
-            language: (optional) ISO 639-1 code.
-            page: (optional) Minimum 1, maximum 1000, default 1.
-
-        Returns:
-            A dict representation of the JSON returned from the API.
-        """
-        path = self._get_id_path("tagged_images")
-
-        response = self._GET(path, kwargs)
-        self._set_attrs_to_values(response)
-        return response
-
     def translations(self, **kwargs):
         """
         Get a list of translations that have been created for a person.

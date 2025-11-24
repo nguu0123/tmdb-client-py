@@ -70,12 +70,6 @@ class PeopleTestCase(unittest.TestCase):
         person.images()
         self.assertTrue(hasattr(person, "profiles"))
 
-    def test_people_tagged_images(self):
-        id = PEOPLE_ID
-        person = tmdb.People(id)
-        person.tagged_images()
-        self.assertTrue(hasattr(person, "results"))
-
     def test_people_translations(self):
         id = PEOPLE_ID
         person = tmdb.People(id)
