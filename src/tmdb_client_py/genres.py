@@ -30,7 +30,7 @@ class Genres(TMDB):
         super().__init__()
         self.id = id
 
-    def movie_list(self, **kwargs):
+    def movie_list(self, language: str | None = None):
         """
         Get the list of official genres for movies.
 
@@ -41,12 +41,15 @@ class Genres(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("movie_list")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def tv_list(self, **kwargs):
+    def tv_list(self, language: str | None = None):
         """
         Get the list of official genres for TV shows.
 
@@ -57,13 +60,22 @@ class Genres(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("tv_list")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
     # backward compatibility
-    def movies(self, **kwargs):
+    def movies(
+        self,
+        page: int | None = None,
+        language: str | None = None,
+        include_all_movies: bool | None = None,
+        include_adult: bool | None = None,
+    ):
         """
         Get the list of movies for a particular genre by id. By default, only
         movies with 10 or more votes are included.
@@ -81,6 +93,15 @@ class Genres(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("movies")
+        kwargs = {}
+        if page is not None:
+            kwargs["page"] = page
+        if language is not None:
+            kwargs["language"] = language
+        if include_all_movies is not None:
+            kwargs["include_all_movies"] = include_all_movies
+        if include_adult is not None:
+            kwargs["include_adult"] = include_adult
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

@@ -40,7 +40,7 @@ class Account(TMDB):
         super().__init__()
         self.session_id = session_id
 
-    def info(self, **kwargs):
+    def info(self):
         """
         Get your account details.
 
@@ -51,12 +51,12 @@ class Account(TMDB):
         """
         path = self._get_path("info")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self.id = response["id"]
         self._set_attrs_to_values(response)
         return response
 
-    def lists(self, **kwargs):
+    def lists(self, language: str | None = None, page: int | None = None):
         """
         Get all of the lists created by an account. Will include private lists
         if you are the owner.
@@ -69,12 +69,22 @@ class Account(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("lists")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def favorite_movies(self, **kwargs):
+    def favorite_movies(
+        self,
+        language: str | None = None,
+        sort_by: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get the list of your favorite movies.
 
@@ -87,12 +97,24 @@ class Account(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("favorite_movies")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def favorite_tv(self, **kwargs):
+    def favorite_tv(
+        self,
+        language: str | None = None,
+        sort_by: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get the list of your favorite TV shows.
 
@@ -105,12 +127,19 @@ class Account(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("favorite_tv")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def favorite(self, **kwargs):
+    def favorite(self, media_type: str, media_id: int, favorite: bool):
         """
         This method allows you to mark a movie or TV show as a favorite item.
 
@@ -125,16 +154,21 @@ class Account(TMDB):
         path = self._get_id_path("favorite")
 
         payload = {
-            "media_type": kwargs.pop("media_type", None),
-            "media_id": kwargs.pop("media_id", None),
-            "favorite": kwargs.pop("favorite", None),
+            "media_type": media_type,
+            "media_id": media_id,
+            "favorite": favorite,
         }
 
-        response = self._POST(path, kwargs, payload)
+        response = self._POST(path, {}, payload)
         self._set_attrs_to_values(response)
         return response
 
-    def rated_movies(self, **kwargs):
+    def rated_movies(
+        self,
+        language: str | None = None,
+        sort_by: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get a list of all the movies you have rated.
 
@@ -147,12 +181,24 @@ class Account(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("rated_movies")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def rated_tv(self, **kwargs):
+    def rated_tv(
+        self,
+        language: str | None = None,
+        sort_by: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get a list of all the TV shows you have rated.
 
@@ -165,13 +211,24 @@ class Account(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("rated_tv")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def rated_tv_episodes(self, **kwargs):
+    def rated_tv_episodes(
+        self,
+        language: str | None = None,
+        sort_by: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get a list of all the TV episodes you have rated.
 
@@ -184,13 +241,24 @@ class Account(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("rated_tv_episodes")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def watchlist_movies(self, **kwargs):
+    def watchlist_movies(
+        self,
+        language: str | None = None,
+        sort_by: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get a list of all the movies you have added to your watchlist.
 
@@ -203,13 +271,24 @@ class Account(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("watchlist_movies")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def watchlist_tv(self, **kwargs):
+    def watchlist_tv(
+        self,
+        language: str | None = None,
+        sort_by: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get a list of all the TV shows you have added to your watchlist.
 
@@ -222,13 +301,19 @@ class Account(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("watchlist_tv")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def watchlist(self, **kwargs):
+    def watchlist(self, media_type: str, media_id: int, watchlist: bool):
         """
         Add a movie or TV show to your watchlist.
 
@@ -241,12 +326,12 @@ class Account(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("watchlist")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id}
 
         payload = {
-            "media_type": kwargs.pop("media_type", None),
-            "media_id": kwargs.pop("media_id", None),
-            "watchlist": kwargs.pop("watchlist", None),
+            "media_type": media_type,
+            "media_id": media_id,
+            "watchlist": watchlist,
         }
 
         response = self._POST(path, kwargs, payload)
@@ -271,7 +356,7 @@ class Authentication(TMDB):
         "session_delete": "/session",
     }
 
-    def guest_session_new(self, **kwargs):
+    def guest_session_new(self):
         """
         This method will let you create a new guest session. Guest sessions
         are a type of session that will let a user rate movies and TV shows
@@ -295,11 +380,11 @@ class Authentication(TMDB):
         """
         path = self._get_path("guest_session_new")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def token_new(self, **kwargs):
+    def token_new(self):
         """
         Create a temporary request token that can be used to validate a TMDb
         user login. More details about how this works can be found here
@@ -312,11 +397,11 @@ class Authentication(TMDB):
         """
         path = self._get_path("token_new")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def session_new(self, **kwargs):
+    def session_new(self, request_token: str | None = None):
         """
         You can use this method to create a fully valid session ID once a user
         has validated the request token. More information about how this works
@@ -332,12 +417,17 @@ class Authentication(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("session_new")
+        kwargs = {}
+        if request_token is not None:
+            kwargs["request_token"] = request_token
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def token_validate_with_login(self, **kwargs):
+    def token_validate_with_login(
+        self, username: str, password: str, request_token: str
+    ):
         """
         This method allows an application to validate a request token by entering
         a username and password.
@@ -361,12 +451,17 @@ class Authentication(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("token_validate_with_login")
+        kwargs = {
+            "username": username,
+            "password": password,
+            "request_token": request_token,
+        }
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def session_delete(self, **kwargs):
+    def session_delete(self, session_id: str):
         """
         If you would like to delete (or "logout") from a session, call this
         method with a valid session ID.
@@ -379,10 +474,10 @@ class Authentication(TMDB):
         path = self._get_path("session_delete")
 
         payload = {
-            "session_id": kwargs.pop("session_id", None),
+            "session_id": session_id,
         }
 
-        response = self._DELETE(path, kwargs, payload)
+        response = self._DELETE(path, {}, payload)
         self._set_attrs_to_values(response)
         return response
 
@@ -408,7 +503,7 @@ class GuestSessions(TMDB):
     def _get_guest_session_id_path(self, key):
         return self._get_path(key).format(guest_session_id=self.guest_session_id)
 
-    def rated_movies(self, **kwargs):
+    def rated_movies(self, language: str | None = None, sort_by: str | None = None):
         """
         Get the rated movies for a guest session.
 
@@ -420,12 +515,17 @@ class GuestSessions(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_guest_session_id_path("rated_movies")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def rated_tv(self, **kwargs):
+    def rated_tv(self, language: str | None = None, sort_by: str | None = None):
         """
         Get the rated TV shows for a guest session.
 
@@ -437,12 +537,19 @@ class GuestSessions(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_guest_session_id_path("rated_tv")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def rated_tv_episodes(self, **kwargs):
+    def rated_tv_episodes(
+        self, language: str | None = None, sort_by: str | None = None
+    ):
         """
         Get the rated TV episodes for a guest session.
 
@@ -454,6 +561,11 @@ class GuestSessions(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_guest_session_id_path("rated_tv_episodes")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -484,7 +596,7 @@ class Lists(TMDB):
         self.session_id = session_id
         self.list_id: int | None = None
 
-    def info(self, **kwargs):
+    def info(self, language: str | None = None):
         """
         Get the details of a list.
 
@@ -495,12 +607,15 @@ class Lists(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("info")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def item_status(self, **kwargs):
+    def item_status(self, movie_id: int):
         """
         You can use this method to check if a movie has already been added to
         the list.
@@ -512,12 +627,13 @@ class Lists(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("item_status")
+        kwargs = {"movie_id": movie_id}
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def list_create(self, **kwargs):
+    def list_create(self, name: str, description: str, language: str | None = None):
         """
         Create a list.
 
@@ -530,12 +646,12 @@ class Lists(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("list_create")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id}
 
         payload = {
-            "name": kwargs.pop("name", None),
-            "description": kwargs.pop("description", None),
-            "language": kwargs.pop("language", None),
+            "name": name,
+            "description": description,
+            "language": language,
         }
 
         response = self._POST(path, kwargs, payload)
@@ -543,7 +659,7 @@ class Lists(TMDB):
         self.id = self.list_id
         return response
 
-    def add_item(self, **kwargs):
+    def add_item(self, media_id: int):
         """
         Add a movie to a list.
 
@@ -554,17 +670,17 @@ class Lists(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("add_item")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id}
 
         payload = {
-            "media_id": kwargs.pop("media_id", None),
+            "media_id": media_id,
         }
 
         response = self._POST(path, kwargs, payload)
         self._set_attrs_to_values(response)
         return response
 
-    def remove_item(self, **kwargs):
+    def remove_item(self, media_id: int):
         """
         Remove a movie from a list.
 
@@ -575,17 +691,17 @@ class Lists(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("remove_item")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id}
 
         payload = {
-            "media_id": kwargs.pop("media_id", None),
+            "media_id": media_id,
         }
 
         response = self._POST(path, kwargs, payload)
         self._set_attrs_to_values(response)
         return response
 
-    def list_clear(self, **kwargs):
+    def list_clear(self, confirm: bool):
         """
         Clear all of the items from a list.
 
@@ -596,7 +712,7 @@ class Lists(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("list_clear")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id, "confirm": str(confirm).lower()}
 
         payload = {}
 
@@ -604,7 +720,7 @@ class Lists(TMDB):
         self._set_attrs_to_values(response)
         return response
 
-    def list_delete(self, **kwargs):
+    def list_delete(self):
         """
         Delete a list.
 
@@ -615,7 +731,7 @@ class Lists(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("list_delete")
-        kwargs.update({"session_id": self.session_id})
+        kwargs = {"session_id": self.session_id}
 
         response = self._DELETE(path, kwargs)
         self._set_attrs_to_values(response)

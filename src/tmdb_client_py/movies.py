@@ -52,7 +52,7 @@ class Movies(TMDB):
         super().__init__()
         self.id = id
 
-    def info(self, **kwargs):
+    def info(self, language: str | None = None, append_to_response: str | None = None):
         """
         Get the primary information about a movie.
 
@@ -68,12 +68,17 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("info")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if append_to_response is not None:
+            kwargs["append_to_response"] = append_to_response
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def account_states(self, **kwargs):
+    def account_states(self, session_id: str, guest_session_id: str | None = None):
         """
         Grab the following account states for a session:
             - Movie rating
@@ -88,12 +93,15 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("account_states")
+        kwargs = {"session_id": session_id}
+        if guest_session_id is not None:
+            kwargs["guest_session_id"] = guest_session_id
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def alternative_titles(self, **kwargs):
+    def alternative_titles(self, country: str | None = None):
         """
         Get all of the alternative titles for a movie.
 
@@ -104,12 +112,20 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("alternative_titles")
+        kwargs = {}
+        if country is not None:
+            kwargs["country"] = country
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def changes(self, **kwargs):
+    def changes(
+        self,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get the changes for a movie. By default only the last 24 hours are returned.
 
@@ -127,12 +143,19 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("changes")
+        kwargs = {}
+        if start_date is not None:
+            kwargs["start_date"] = start_date
+        if end_date is not None:
+            kwargs["end_date"] = end_date
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def credits(self, **kwargs):
+    def credits(self):
         """
         Get the cast and crew for a movie.
 
@@ -144,11 +167,11 @@ class Movies(TMDB):
         """
         path = self._get_id_path("credits")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def external_ids(self, **kwargs):
+    def external_ids(self):
         """
         Get the external ids for a movie. We currently support the following
         external sources.
@@ -164,11 +187,13 @@ class Movies(TMDB):
         """
         path = self._get_id_path("external_ids")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def images(self, **kwargs):
+    def images(
+        self, language: str | None = None, include_image_language: str | None = None
+    ):
         """
         Get the images that belong to a movie.
 
@@ -187,6 +212,11 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("images")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if include_image_language is not None:
+            kwargs["include_image_language"] = include_image_language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -208,7 +238,7 @@ class Movies(TMDB):
         self._set_attrs_to_values(response)
         return response
 
-    def lists(self, **kwargs):
+    def lists(self, language: str | None = None, page: int | None = None):
         """
         Get a list of lists that this movie belongs to.
 
@@ -220,12 +250,17 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("lists")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def recommendations(self, **kwargs):
+    def recommendations(self, language: str | None = None, page: int | None = None):
         """
         Get a list of recommended movies for a movie.
 
@@ -237,12 +272,17 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("recommendations")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def release_dates(self, **kwargs):
+    def release_dates(self):
         """
         Get the release date along with the certification for a movie.
 
@@ -263,11 +303,11 @@ class Movies(TMDB):
         """
         path = self._get_id_path("release_dates")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def reviews(self, **kwargs):
+    def reviews(self, language: str | None = None, page: int | None = None):
         """
         Get the user reviews for a movie.
 
@@ -279,12 +319,17 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("reviews")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def similar_movies(self, **kwargs):
+    def similar_movies(self, language: str | None = None, page: int | None = None):
         """
         Get a list of similar movies. This is not the same as the
         "Recommendation" system you see on the website.
@@ -299,12 +344,17 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("similar_movies")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def translations(self, **kwargs):
+    def translations(self):
         """
         Get a list of translations that have been created for a movie.
 
@@ -316,11 +366,11 @@ class Movies(TMDB):
         """
         path = self._get_id_path("translations")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def videos(self, **kwargs):
+    def videos(self, language: str | None = None):
         """
         Get the videos that have been added to a movie.
 
@@ -331,12 +381,15 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("videos")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def watch_providers(self, **kwargs):
+    def watch_providers(self):
         """
         Get a list of the availabilities per country by provider for movies.
 
@@ -348,11 +401,16 @@ class Movies(TMDB):
         """
         path = self._get_id_path("watch_providers")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def rating(self, **kwargs):
+    def rating(
+        self,
+        value: float,
+        session_id: str | None = None,
+        guest_session_id: str | None = None,
+    ):
         """
         Rate a movie.
 
@@ -370,16 +428,23 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("rating")
+        kwargs = {}
+        if session_id is not None:
+            kwargs["session_id"] = session_id
+        if guest_session_id is not None:
+            kwargs["guest_session_id"] = guest_session_id
 
         payload = {
-            "value": kwargs.pop("value", None),
+            "value": value,
         }
 
         response = self._POST(path, kwargs, payload)
         self._set_attrs_to_values(response)
         return response
 
-    def rating_delete(self, **kwargs):
+    def rating_delete(
+        self, session_id: str | None = None, guest_session_id: str | None = None
+    ):
         """
         Remove your rating for a movie.
 
@@ -395,16 +460,17 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("rating_delete")
+        kwargs = {}
+        if session_id is not None:
+            kwargs["session_id"] = session_id
+        if guest_session_id is not None:
+            kwargs["guest_session_id"] = guest_session_id
 
-        payload = {
-            "value": kwargs.pop("value", None),
-        }
-
-        response = self._DELETE(path, kwargs, payload)
+        response = self._DELETE(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def latest(self, **kwargs):
+    def latest(self, language: str | None = None):
         """
         Get the most newly created movie. This is a live response and will
         continuously change.
@@ -416,12 +482,20 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("latest")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def now_playing(self, **kwargs):
+    def now_playing(
+        self,
+        language: str | None = None,
+        page: int | None = None,
+        region: str | None = None,
+    ):
         """
         Get a list of movies in theatres. This is a release type query that
         looks for all movies that have a release type of 2 or 3 within the
@@ -441,12 +515,24 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("now_playing")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
+        if region is not None:
+            kwargs["region"] = region
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def popular(self, **kwargs):
+    def popular(
+        self,
+        language: str | None = None,
+        page: int | None = None,
+        region: str | None = None,
+    ):
         """
         Get a list of the current popular movies on TMDb. This list updates
         daily.
@@ -461,12 +547,24 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("popular")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
+        if region is not None:
+            kwargs["region"] = region
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def top_rated(self, **kwargs):
+    def top_rated(
+        self,
+        language: str | None = None,
+        page: int | None = None,
+        region: str | None = None,
+    ):
         """
         Get the top rated movies on TMDb.
 
@@ -480,12 +578,24 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("top_rated")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
+        if region is not None:
+            kwargs["region"] = region
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def upcoming(self, **kwargs):
+    def upcoming(
+        self,
+        language: str | None = None,
+        page: int | None = None,
+        region: str | None = None,
+    ):
         """
         Get a list of upcoming movies in theatres. This is a release type query
         that looks for all movies that have a release type of 2 or 3 within the
@@ -505,13 +615,20 @@ class Movies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("upcoming")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
+        if region is not None:
+            kwargs["region"] = region
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
     # backward compatibility
-    def releases(self, **kwargs):
+    def releases(self):
         """
         Get the release date and certification information by country for a
         specific movie id.
@@ -524,7 +641,7 @@ class Movies(TMDB):
         """
         path = self._get_id_path("releases")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
@@ -547,7 +664,7 @@ class Collections(TMDB):
         super().__init__()
         self.id = id
 
-    def info(self, **kwargs):
+    def info(self, language: str | None = None):
         """
         Get collection details by id.
 
@@ -558,12 +675,15 @@ class Collections(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("info")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def images(self, **kwargs):
+    def images(self, language: str | None = None):
         """
         Get the images for a collection by id.
 
@@ -574,12 +694,15 @@ class Collections(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("images")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def translations(self, **kwargs):
+    def translations(self, language: str | None = None):
         """
         Get a list of the translations for a collection by id.
 
@@ -590,6 +713,9 @@ class Collections(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("translations")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -615,7 +741,7 @@ class Companies(TMDB):
         super().__init__()
         self.id = id
 
-    def info(self, **kwargs):
+    def info(self):
         """
         Get a companies details by id.
 
@@ -626,11 +752,11 @@ class Companies(TMDB):
         """
         path = self._get_id_path("info")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def alternative_names(self, **kwargs):
+    def alternative_names(self):
         """
         Get the alternative names of a company.
 
@@ -641,11 +767,11 @@ class Companies(TMDB):
         """
         path = self._get_id_path("alternative_names")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def images(self, **kwargs):
+    def images(self):
         """
         Get a company's logos by id.
 
@@ -666,12 +792,12 @@ class Companies(TMDB):
         """
         path = self._get_id_path("images")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
     # backward compatibility
-    def movies(self, **kwargs):
+    def movies(self, language: str | None = None, page: int | None = None):
         """
         Get the list of movies associated with a particular company.
 
@@ -683,6 +809,11 @@ class Companies(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("movies")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -706,7 +837,7 @@ class Keywords(TMDB):
         super().__init__()
         self.id = id
 
-    def info(self, **kwargs):
+    def info(self):
         """
         Get the details of a keyword.
 
@@ -718,11 +849,11 @@ class Keywords(TMDB):
         """
         path = self._get_id_path("info")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def movies(self, **kwargs):
+    def movies(self, language: str | None = None, include_adult: bool | None = None):
         """
         Get the movies that belong to a keyword.
 
@@ -738,6 +869,11 @@ class Keywords(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("movies")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if include_adult is not None:
+            kwargs["include_adult"] = include_adult
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -760,7 +896,7 @@ class Reviews(TMDB):
         super().__init__()
         self.id = id
 
-    def info(self, **kwargs):
+    def info(self):
         """
         Get the review details by id.
 
@@ -772,6 +908,6 @@ class Reviews(TMDB):
         """
         path = self._get_id_path("info")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response

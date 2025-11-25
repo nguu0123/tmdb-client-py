@@ -94,6 +94,7 @@ class TMDB:
         return response.json()
 
     def _GET(self, path, params=None):
+        print(path, params)
         return self._request("GET", path, params=params)
 
     def _POST(self, path, params=None, payload=None):

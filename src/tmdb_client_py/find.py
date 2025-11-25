@@ -28,7 +28,7 @@ class Find(TMDB):
         super().__init__()
         self.id = id
 
-    def info(self, **kwargs):
+    def info(self, language: str | None = None, external_source: str | None = None):
         """
         The find method makes it easy to search for objects in our database by
         an external id. For example, an IMDB ID.
@@ -51,6 +51,11 @@ class Find(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("info")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if external_source is not None:
+            kwargs["external_source"] = external_source
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -74,7 +79,7 @@ class Trending(TMDB):
         self.media_type = media_type
         self.time_window = time_window
 
-    def info(self, **kwargs):
+    def info(self):
         """
         Get the daily or weekly trending items. The daily trending list tracks
         items over the period of a day while items have a 24 hour half life.
@@ -100,7 +105,7 @@ class Trending(TMDB):
         """
         path = self._get_media_type_time_window_path("info")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 

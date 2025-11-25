@@ -26,7 +26,12 @@ class Changes(TMDB):
         "person": "person/changes",
     }
 
-    def movie(self, **kwargs):
+    def movie(
+        self,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get a list of all of the movie ids that have been changed
         in the past 24 hours.
@@ -44,12 +49,24 @@ class Changes(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("movie")
+        kwargs = {}
+        if start_date is not None:
+            kwargs["start_date"] = start_date
+        if end_date is not None:
+            kwargs["end_date"] = end_date
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def tv(self, **kwargs):
+    def tv(
+        self,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get a list of all of the TV show ids that have been changed
         in the past 24 hours.
@@ -67,12 +84,24 @@ class Changes(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("tv")
+        kwargs = {}
+        if start_date is not None:
+            kwargs["start_date"] = start_date
+        if end_date is not None:
+            kwargs["end_date"] = end_date
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def person(self, **kwargs):
+    def person(
+        self,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get a list of all of the person ids that have been changed
         in the past 24 hours.
@@ -90,6 +119,13 @@ class Changes(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("person")
+        kwargs = {}
+        if start_date is not None:
+            kwargs["start_date"] = start_date
+        if end_date is not None:
+            kwargs["end_date"] = end_date
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

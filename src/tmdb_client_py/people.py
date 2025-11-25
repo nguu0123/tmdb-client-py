@@ -38,7 +38,7 @@ class People(TMDB):
         super().__init__()
         self.id = id
 
-    def info(self, **kwargs):
+    def info(self, language: str | None = None, append_to_response: str | None = None):
         """
         Get the primary person details by id.
 
@@ -54,12 +54,22 @@ class People(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("info")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if append_to_response is not None:
+            kwargs["append_to_response"] = append_to_response
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def changes(self, **kwargs):
+    def changes(
+        self,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        page: int | None = None,
+    ):
         """
         Get the changes for a person. By default only the last 24 hours are returned.
 
@@ -77,12 +87,19 @@ class People(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("changes")
+        kwargs = {}
+        if start_date is not None:
+            kwargs["start_date"] = start_date
+        if end_date is not None:
+            kwargs["end_date"] = end_date
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def movie_credits(self, **kwargs):
+    def movie_credits(self, language: str | None = None):
         """
         Get the movie credits for a person.
 
@@ -93,12 +110,15 @@ class People(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("movie_credits")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def tv_credits(self, **kwargs):
+    def tv_credits(self, language: str | None = None):
         """
         Get the TV show credits for a person.
 
@@ -112,12 +132,15 @@ class People(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("tv_credits")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def combined_credits(self, **kwargs):
+    def combined_credits(self, language: str | None = None):
         """
         Get the movie and TV credits together in a single response.
 
@@ -128,12 +151,15 @@ class People(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("combined_credits")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def external_ids(self, **kwargs):
+    def external_ids(self, language: str | None = None):
         """
         Get the external ids for a person. We currently support the following external sources.
 
@@ -153,12 +179,15 @@ class People(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("external_ids")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def images(self, **kwargs):
+    def images(self):
         """
         Get the images for a person.
 
@@ -170,11 +199,11 @@ class People(TMDB):
         """
         path = self._get_id_path("images")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def translations(self, **kwargs):
+    def translations(self, language: str | None = None):
         """
         Get a list of translations that have been created for a person.
 
@@ -185,12 +214,15 @@ class People(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_id_path("translations")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def latest(self, **kwargs):
+    def latest(self, language: str | None = None):
         """
         Get the most newly created person. This is a live response and will
         continuously change.
@@ -202,12 +234,15 @@ class People(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("latest")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def popular(self, **kwargs):
+    def popular(self, language: str | None = None, page: int | None = None):
         """
         Get the list of popular people on TMDb. This list updates daily.
 
@@ -219,6 +254,11 @@ class People(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("popular")
+        kwargs = {}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
@@ -241,7 +281,7 @@ class Credits(TMDB):
         super().__init__()
         self.credit_id = credit_id
 
-    def info(self, **kwargs):
+    def info(self):
         """
         Get a movie or TV credit details by id.
 
@@ -253,7 +293,7 @@ class Credits(TMDB):
         """
         path = self._get_credit_id_path("info")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
