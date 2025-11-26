@@ -22,7 +22,7 @@ class Movies(TMDB):
 
     BASE_PATH = "movie"
     URLS = {
-        "info": "/{id}",
+        "details": "/{id}",
         "account_states": "/{id}/account_states",
         "alternative_titles": "/{id}/alternative_titles",
         "changes": "/{id}/changes",
@@ -52,7 +52,9 @@ class Movies(TMDB):
         super().__init__()
         self.id = id
 
-    def info(self, language: str | None = None, append_to_response: str | None = None):
+    def details(
+        self, language: str | None = None, append_to_response: str | None = None
+    ):
         """
         Get the primary information about a movie.
 
@@ -67,7 +69,7 @@ class Movies(TMDB):
         Returns:
             A dict representation of the JSON returned from the API.
         """
-        path = self._get_id_path("info")
+        path = self._get_id_path("details")
         kwargs = {}
         if language is not None:
             kwargs["language"] = language

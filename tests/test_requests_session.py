@@ -32,5 +32,5 @@ class RequestsSessionTestCase(unittest.TestCase):
         id = MOVIE_ID
         title = MOVIE_TITLE
         movie = tmdb.Movies(id)
-        movie.info()
+        movie.details()
         self.assertEqual(movie.title, title)

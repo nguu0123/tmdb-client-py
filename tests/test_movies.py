@@ -47,14 +47,14 @@ class MoviesTestCase(unittest.TestCase):
         id = MOVIE_ID
         title = MOVIE_TITLE
         movie = tmdb.Movies(id)
-        movie.info()
+        movie.details()
         self.assertEqual(movie.title, title)
 
     def test_movies_info_with_params(self):
         id = MOVIE_ID
         title = MOVIE_TITLE_GERMAN
         movie = tmdb.Movies(id)
-        movie.info(language="de")
+        movie.details(language="de")
         self.assertEqual(movie.title, title)
 
     def test_movies_account_states(self):
