@@ -30,7 +30,7 @@ class Search(TMDB):
         "tv": "/tv",
     }
 
-    def company(self, **kwargs):
+    def company(self, query: str, page: int | None = None):
         """
         Search for companies.
 
@@ -43,12 +43,17 @@ class Search(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("company")
+        kwargs = {"query": query}
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def collection(self, **kwargs):
+    def collection(
+        self, query: str, language: str | None = None, page: int | None = None
+    ):
         """
         Search for collections.
 
@@ -62,12 +67,17 @@ class Search(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("collection")
+        kwargs = {"query": query}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def keyword(self, **kwargs):
+    def keyword(self, query: str, page: int | None = None):
         """
         Search for keywords.
 
@@ -80,12 +90,24 @@ class Search(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("keyword")
+        kwargs = {"query": query}
+        if page is not None:
+            kwargs["page"] = page
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def movie(self, **kwargs):
+    def movie(
+        self,
+        query: str,
+        language: str | None = None,
+        page: int | None = None,
+        include_adult: bool | None = None,
+        region: str | None = None,
+        year: int | None = None,
+        primary_release_year: int | None = None,
+    ):
         """
         Search for movies.
 
@@ -107,12 +129,32 @@ class Search(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("movie")
+        kwargs = {"query": query}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
+        if include_adult is not None:
+            kwargs["include_adult"] = include_adult
+        if region is not None:
+            kwargs["region"] = region
+        if year is not None:
+            kwargs["year"] = year
+        if primary_release_year is not None:
+            kwargs["primary_release_year"] = primary_release_year
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def multi(self, **kwargs):
+    def multi(
+        self,
+        query: str,
+        language: str | None = None,
+        page: int | None = None,
+        include_adult: bool | None = None,
+        region: str | None = None,
+    ):
         """
         Search multiple models in a single request. Multi search currently
         supports searching for movies, tv shows and people in a single request.
@@ -131,12 +173,28 @@ class Search(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("multi")
+        kwargs = {"query": query}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
+        if include_adult is not None:
+            kwargs["include_adult"] = include_adult
+        if region is not None:
+            kwargs["region"] = region
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def person(self, **kwargs):
+    def person(
+        self,
+        query: str,
+        language: str | None = None,
+        page: int | None = None,
+        include_adult: bool | None = None,
+        region: str | None = None,
+    ):
         """
         Search for people.
 
@@ -154,12 +212,28 @@ class Search(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("person")
+        kwargs = {"query": query}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
+        if include_adult is not None:
+            kwargs["include_adult"] = include_adult
+        if region is not None:
+            kwargs["region"] = region
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)
         return response
 
-    def tv(self, **kwargs):
+    def tv(
+        self,
+        query: str,
+        language: str | None = None,
+        page: int | None = None,
+        include_adult: bool | None = None,
+        first_air_date_year: int | None = None,
+    ):
         """
         Search for a TV show.
 
@@ -177,6 +251,15 @@ class Search(TMDB):
             A dict representation of the JSON returned from the API.
         """
         path = self._get_path("tv")
+        kwargs = {"query": query}
+        if language is not None:
+            kwargs["language"] = language
+        if page is not None:
+            kwargs["page"] = page
+        if include_adult is not None:
+            kwargs["include_adult"] = include_adult
+        if first_air_date_year is not None:
+            kwargs["first_air_date_year"] = first_air_date_year
 
         response = self._GET(path, kwargs)
         self._set_attrs_to_values(response)

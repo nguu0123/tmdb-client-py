@@ -31,7 +31,7 @@ class Configuration(TMDB):
         "timezones": "/timezones",
     }
 
-    def info(self, **kwargs):
+    def info(self):
         """
         Get the system wide configuration information. Some elements of the API
         require some knowledge of this configuration data. The purpose of this
@@ -60,11 +60,11 @@ class Configuration(TMDB):
         """
         path = self._get_path("info")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def countries(self, **kwargs):
+    def countries(self):
         """
         Get the list of countries (ISO 3166-1 tags) used throughout TMDb.
 
@@ -76,11 +76,11 @@ class Configuration(TMDB):
         """
         path = self._get_path("countries")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def jobs(self, **kwargs):
+    def jobs(self):
         """
         Get a list of the jobs and departments we use on TMDb.
 
@@ -92,11 +92,11 @@ class Configuration(TMDB):
         """
         path = self._get_path("jobs")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def languages(self, **kwargs):
+    def languages(self):
         """
         Get the list of languages (ISO 639-1 tags) used throughout TMDb.
 
@@ -108,11 +108,11 @@ class Configuration(TMDB):
         """
         path = self._get_path("languages")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def primary_translations(self, **kwargs):
+    def primary_translations(self):
         """
         Get a list of the officially supported translations on TMDb.
 
@@ -124,11 +124,11 @@ class Configuration(TMDB):
         """
         path = self._get_path("primary_translations")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def timezones(self, **kwargs):
+    def timezones(self):
         """
         Get the list of timezones used throughout TMDb.
 
@@ -140,7 +140,7 @@ class Configuration(TMDB):
         """
         path = self._get_path("timezones")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
@@ -158,7 +158,7 @@ class Certifications(TMDB):
         "tv_list": "/tv/list",
     }
 
-    def movie_list(self, **kwargs):
+    def movie_list(self):
         """
         Get an up to date list of the officially supported movie certifications on TMDb.
 
@@ -170,11 +170,11 @@ class Certifications(TMDB):
         """
         path = self._get_path("movie_list")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
-    def tv_list(self, **kwargs):
+    def tv_list(self):
         """
         Get an up to date list of the officially supported TV show certifications on TMDb.
 
@@ -186,12 +186,12 @@ class Certifications(TMDB):
         """
         path = self._get_path("tv_list")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response
 
     # backward compatibility, when only /movie/list existed
-    def list(self, **kwargs):
+    def list(self):
         """
         Get the list of supported certifications for movies.
 
@@ -203,6 +203,6 @@ class Certifications(TMDB):
         """
         path = self._get_path("movie_list")
 
-        response = self._GET(path, kwargs)
+        response = self._GET(path)
         self._set_attrs_to_values(response)
         return response

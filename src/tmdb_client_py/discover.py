@@ -25,7 +25,41 @@ class Discover(TMDB):
         "tv": "/tv",
     }
 
-    def movie(self, **kwargs):
+    def movie(
+        self,
+        language: str | None = None,
+        region: str | None = None,
+        sort_by: str | None = None,
+        certification_country: str | None = None,
+        certification: str | None = None,
+        certification_lte: str | None = None,
+        certification_gte: str | None = None,
+        include_adult: bool | None = None,
+        include_video: bool | None = None,
+        page: int | None = None,
+        primary_release_year: int | None = None,
+        primary_release_date_gte: str | None = None,
+        primary_release_date_lte: str | None = None,
+        release_date_gte: str | None = None,
+        release_date_lte: str | None = None,
+        year: int | None = None,
+        vote_count_gte: int | None = None,
+        vote_count_lte: int | None = None,
+        vote_average_gte: float | None = None,
+        vote_average_lte: float | None = None,
+        with_cast: str | None = None,
+        with_crew: str | None = None,
+        with_people: str | None = None,
+        with_companies: str | None = None,
+        with_genres: str | None = None,
+        without_genres: str | None = None,
+        with_keywords: str | None = None,
+        without_keywords: str | None = None,
+        with_runtime_gte: int | None = None,
+        with_runtime_lte: int | None = None,
+        with_original_language: str | None = None,
+        **kwargs,
+    ):
         """
         Discover movies by different types of data like average rating, number
         of votes, genres and certifications. You can get a valid list of
@@ -139,6 +173,70 @@ class Discover(TMDB):
         Returns:
             A dict representation of the JSON returned from the API.
         """
+        # Convert the direct parameters to the kwargs dict
+        if language is not None:
+            kwargs["language"] = language
+        if region is not None:
+            kwargs["region"] = region
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
+        if certification_country is not None:
+            kwargs["certification_country"] = certification_country
+        if certification is not None:
+            kwargs["certification"] = certification
+        if certification_lte is not None:
+            kwargs["certification.lte"] = certification_lte
+        if certification_gte is not None:
+            kwargs["certification.gte"] = certification_gte
+        if include_adult is not None:
+            kwargs["include_adult"] = include_adult
+        if include_video is not None:
+            kwargs["include_video"] = include_video
+        if page is not None:
+            kwargs["page"] = page
+        if primary_release_year is not None:
+            kwargs["primary_release_year"] = primary_release_year
+        if primary_release_date_gte is not None:
+            kwargs["primary_release_date.gte"] = primary_release_date_gte
+        if primary_release_date_lte is not None:
+            kwargs["primary_release_date.lte"] = primary_release_date_lte
+        if release_date_gte is not None:
+            kwargs["release_date.gte"] = release_date_gte
+        if release_date_lte is not None:
+            kwargs["release_date.lte"] = release_date_lte
+        if year is not None:
+            kwargs["year"] = year
+        if vote_count_gte is not None:
+            kwargs["vote_count.gte"] = vote_count_gte
+        if vote_count_lte is not None:
+            kwargs["vote_count.lte"] = vote_count_lte
+        if vote_average_gte is not None:
+            kwargs["vote_average.gte"] = vote_average_gte
+        if vote_average_lte is not None:
+            kwargs["vote_average.lte"] = vote_average_lte
+        if with_cast is not None:
+            kwargs["with_cast"] = with_cast
+        if with_crew is not None:
+            kwargs["with_crew"] = with_crew
+        if with_people is not None:
+            kwargs["with_people"] = with_people
+        if with_companies is not None:
+            kwargs["with_companies"] = with_companies
+        if with_genres is not None:
+            kwargs["with_genres"] = with_genres
+        if without_genres is not None:
+            kwargs["without_genres"] = without_genres
+        if with_keywords is not None:
+            kwargs["with_keywords"] = with_keywords
+        if without_keywords is not None:
+            kwargs["without_keywords"] = without_keywords
+        if with_runtime_gte is not None:
+            kwargs["with_runtime.gte"] = with_runtime_gte
+        if with_runtime_lte is not None:
+            kwargs["with_runtime.lte"] = with_runtime_lte
+        if with_original_language is not None:
+            kwargs["with_original_language"] = with_original_language
+
         # Periods are not allowed in keyword arguments but several API
         # arguments contain periods. See both usages in tests/test_discover.py.
         for param in dict(kwargs):
@@ -153,7 +251,32 @@ class Discover(TMDB):
         self._set_attrs_to_values(response)
         return response
 
-    def tv(self, **kwargs):
+    def tv(
+        self,
+        language: str | None = None,
+        sort_by: str | None = None,
+        air_date_gte: str | None = None,
+        air_date_lte: str | None = None,
+        first_air_date_gte: str | None = None,
+        first_air_date_lte: str | None = None,
+        first_air_date_year: int | None = None,
+        page: int | None = None,
+        timezone: str | None = None,
+        vote_average_gte: float | None = None,
+        vote_count_gte: int | None = None,
+        with_genres: str | None = None,
+        with_networks: str | None = None,
+        without_genres: str | None = None,
+        with_runtime_gte: int | None = None,
+        with_runtime_lte: int | None = None,
+        include_null_first_air_dates: bool | None = None,
+        with_original_language: str | None = None,
+        without_keywords: str | None = None,
+        screened_theatrically: bool | None = None,
+        with_companies: str | None = None,
+        with_keywords: str | None = None,
+        **kwargs,
+    ):
         """
         Discover TV shows by different types of data like average rating,
         number of votes, genres, the network they aired on and air dates.
@@ -238,6 +361,52 @@ class Discover(TMDB):
         Returns:
             A dict representation of the JSON returned from the API.
         """
+        # Convert the direct parameters to the kwargs dict
+        if language is not None:
+            kwargs["language"] = language
+        if sort_by is not None:
+            kwargs["sort_by"] = sort_by
+        if air_date_gte is not None:
+            kwargs["air_date.gte"] = air_date_gte
+        if air_date_lte is not None:
+            kwargs["air_date.lte"] = air_date_lte
+        if first_air_date_gte is not None:
+            kwargs["first_air_date.gte"] = first_air_date_gte
+        if first_air_date_lte is not None:
+            kwargs["first_air_date.lte"] = first_air_date_lte
+        if first_air_date_year is not None:
+            kwargs["first_air_date_year"] = first_air_date_year
+        if page is not None:
+            kwargs["page"] = page
+        if timezone is not None:
+            kwargs["timezone"] = timezone
+        if vote_average_gte is not None:
+            kwargs["vote_average.gte"] = vote_average_gte
+        if vote_count_gte is not None:
+            kwargs["vote_count.gte"] = vote_count_gte
+        if with_genres is not None:
+            kwargs["with_genres"] = with_genres
+        if with_networks is not None:
+            kwargs["with_networks"] = with_networks
+        if without_genres is not None:
+            kwargs["without_genres"] = without_genres
+        if with_runtime_gte is not None:
+            kwargs["with_runtime.gte"] = with_runtime_gte
+        if with_runtime_lte is not None:
+            kwargs["with_runtime.lte"] = with_runtime_lte
+        if include_null_first_air_dates is not None:
+            kwargs["include_null_first_air_dates"] = include_null_first_air_dates
+        if with_original_language is not None:
+            kwargs["with_original_language"] = with_original_language
+        if without_keywords is not None:
+            kwargs["without_keywords"] = without_keywords
+        if screened_theatrically is not None:
+            kwargs["screened_theatrically"] = screened_theatrically
+        if with_companies is not None:
+            kwargs["with_companies"] = with_companies
+        if with_keywords is not None:
+            kwargs["with_keywords"] = with_keywords
+
         # Periods are not allowed in keyword arguments but several API
         # arguments contain periods. See both usages in tests/test_discover.py.
         for param in dict(kwargs):
